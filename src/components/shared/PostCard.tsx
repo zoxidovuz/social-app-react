@@ -1,5 +1,5 @@
 import { useUserContext } from '@/context/AuthContext'
-import { multiFormatDateString } from '@/lib/utils'
+import { getImageUrl, multiFormatDateString } from '@/lib/utils'
 import { Models } from 'appwrite'
 import { Link } from 'react-router-dom'
 import PostStats from './PostStats'
@@ -14,8 +14,6 @@ const PostCard = ({ post }: PostCardProps) => {
   if (!post.creator) {
     return
   }
-
-  const imageUrl = `https://fra.cloud.appwrite.io/v1/storage/buckets/6804287b0010312e9f15/files/${post.imageId}/view?project=67fb0953002bfc85058c&mode=admin`
 
   return (
     <div className="post-card">
@@ -65,7 +63,7 @@ const PostCard = ({ post }: PostCardProps) => {
         </div>
 
         <img
-          src={imageUrl || '/assets/icons/profile-placeholder.svg'}
+          src={getImageUrl(post.imageId)}
           alt="post-image"
           className="post-card_img"
         />

@@ -53,3 +53,11 @@ export const multiFormatDateString = (timestamp: string = ''): string => {
 export const checkIsLiked = (likeList: string[], userId: string) => {
   return likeList.includes(userId)
 }
+
+export const getImageUrl = (imageId: string) => {
+  if (!imageId) {
+    return '/assets/icons/profile-placeholder.svg'
+  }
+
+  return `https://fra.cloud.appwrite.io/v1/storage/buckets/6804287b0010312e9f15/files/${imageId}/view?project=67fb0953002bfc85058c&mode=admin`
+}

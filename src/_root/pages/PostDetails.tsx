@@ -3,14 +3,14 @@ import PostStats from '@/components/shared/PostStats'
 import { Button } from '@/components/ui/button'
 import { useUserContext } from '@/context/AuthContext'
 import { useGetPostById } from '@/lib/react-query/queriesAndMutations'
-import { multiFormatDateString } from '@/lib/utils'
+import { getImageUrl, multiFormatDateString } from '@/lib/utils'
 import { Link, useParams } from 'react-router-dom'
 
 const PostDetails = () => {
   const { id } = useParams()
   const { data: post, isPending: isLoading } = useGetPostById(id || '')
   const { user } = useUserContext()
-  const imageUrl = `https://fra.cloud.appwrite.io/v1/storage/buckets/6804287b0010312e9f15/files/${post.imageId}/view?project=67fb0953002bfc85058c&mode=admin`
+
 
   const handleDeletePost = () => {}
 
@@ -20,7 +20,11 @@ const PostDetails = () => {
         <Loader />
       ) : (
         <div className="post_details-card">
-          <img src={imageUrl} alt="post" className="post_details-img" />
+          <img
+            src={getImageUrl(post?.imageId)}
+            alt="post"
+            className="post_details-img"
+          />
 
           <div className="post_details-info">
             <div className="flex-between w-full">
