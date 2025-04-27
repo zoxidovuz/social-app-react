@@ -22,6 +22,7 @@ import {
 import { INewPost, INewUser, IUpdatePost } from '@/types'
 import { QUERY_KEYS } from '@/lib/react-query/queryKeys'
 import { data } from 'react-router-dom'
+import { string } from 'zod'
 
 export const useCreateUserAccount = () => {
   return useMutation({

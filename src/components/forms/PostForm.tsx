@@ -34,9 +34,11 @@ const PostForm = ({ post, action }: PostFormProps) => {
     ? `https://fra.cloud.appwrite.io/v1/storage/buckets/6804287b0010312e9f15/files/${post.imageId}/view?project=67fb0953002bfc85058c&mode=admin`
     : ''
 
-  const { mutateAsync: createPost } = useCreatePost()
+  const { mutateAsync: createPost, isPending: isLoadingUpdate } =
+    useCreatePost()
 
-  const { mutateAsync: updatePost } = useUpdatePost()
+  const { mutateAsync: updatePost, isPending: isLoadingCreate } =
+    useUpdatePost()
 
   const { user } = useUserContext()
   const { toast } = useToast()
@@ -159,9 +161,11 @@ const PostForm = ({ post, action }: PostFormProps) => {
           </Button>
           <Button
             type="submit"
+            disabled={isLoadingCreate || isLoadingUpdate}
             className="shad-button_primary whitespace-nowrap rounded"
           >
-            Submit
+            {isLoadingCreate || (isLoadingUpdate && 'Loading...')}
+            {action} Post
           </Button>
         </div>
       </form>
